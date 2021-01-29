@@ -2,9 +2,6 @@ const { articles } = require('../database/models');
 
 //the query function that can be reused
 const query = (ascending, titlesOnly) => async (req, res) => {
-	console.log(ascending, titlesOnly);
-	console.log(req.params);
-
 	//specific search
 	if (req.params.id && typeof(parseInt(req.params.id)) === 'number') {
 		const result = await articles.findOne({
@@ -14,7 +11,7 @@ const query = (ascending, titlesOnly) => async (req, res) => {
 			order: [
 				['index', ascending ? 'ASC' : 'DESC']
 			],
-			offset: parseInt(req.params.id),
+			offset: parseInt(req.query.id) || 0,
 			limit: 1
 		});
 
@@ -30,7 +27,7 @@ const query = (ascending, titlesOnly) => async (req, res) => {
 			order: [
 				['index', ascending ? 'ASC' : 'DESC']
 			],
-			count: req.params.limit || process.env.QUERY_LIMIT || 999
+			limit: parseInt(req.query.limit) || parseInt(process.env.QUERY_LIMIT) || 999
 		});
 
 		return res.status(200).json(result.rows || result);

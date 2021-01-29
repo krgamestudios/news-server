@@ -5,7 +5,8 @@ An API centric news server. Uses Sequelize and mariaDB by default.
 # API
 
 ```
-//NOTE: you can add a "limit" parameter to change the default limit
+//NOTE: you can add a "limit" query parameter to change the default limit
+/news?limit=10
 
 //GET get latest news, up to a default limit, or specify the index "id"
 /news/:id
@@ -42,7 +43,7 @@ An API centric news server. Uses Sequelize and mariaDB by default.
 ]
 
 //POST send a formatted JSON object, returns new index on success, or error on failure
-/publish
+/news/publish
 
 //arguments:
 {
@@ -59,8 +60,8 @@ An API centric news server. Uses Sequelize and mariaDB by default.
 	"error": error		//error encountered, or undefined
 }
 
-//POST similar to /publish, but allows overwriting an existing post
-/edit
+//PATCH similar to `/news/publish`, but allows overwriting an existing post
+/news/edit/:id
 
 //arguments:
 {
@@ -68,7 +69,6 @@ An API centric news server. Uses Sequelize and mariaDB by default.
 	"title": title		//title of the article
 	"author": author	//author of the article
 	"body": body		//body of the article
-	"overwrite": index	//the index to save as - 
 }
 
 //result
@@ -78,4 +78,3 @@ An API centric news server. Uses Sequelize and mariaDB by default.
 }
 
 ```
-
