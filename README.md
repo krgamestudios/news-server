@@ -10,6 +10,7 @@ An API centric news server. Uses Sequelize and mariaDB by default.
 # API
 
 ```
+//NOTE: GET will return null if a specific article can't be found
 //NOTE: you can add a "limit" query parameter to change the default limit
 GET /news?limit=10
 
