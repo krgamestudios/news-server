@@ -5,6 +5,7 @@ const router = express.Router();
 const query = require('./query');
 const publish = require('./publish');
 const edit = require('./edit');
+const remove = require('./remove');
 
 //basic route management
 router.get('/', query(false, false));
@@ -19,5 +20,7 @@ router.get('/archive/titles/:id(\\d+)', query(true, true));
 router.post('/', publish);
 
 router.patch('/:id(\\d+)', edit);
+
+router.delete('/:id(\\d+)', remove);
 
 module.exports = router;

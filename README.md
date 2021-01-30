@@ -57,28 +57,41 @@ POST /news
 	"body": body		//body of the article
 }
 
-//result
+//result:
 {
 	"ok": ok			//true on success, otherwise false
 	"index": index		//new index of the article, or undefined
 	"error": error		//error encountered, or undefined
 }
 
-//similar to `/news/publish`, but allows overwriting an existing post
+//similar to `/news/publish`, but allows overwriting an existing article
 PATCH /news/:id
 
 //arguments:
 {
-	"key": key			//the whitelist key, allows access to the POST routes
+	"key": key			//the whitelist key, allows access to the PATCH routes
 	"title": title		//title of the article
 	"author": author	//author of the article
 	"body": body		//body of the article
 }
 
-//result
+//result:
 {
 	"ok": ok			//true on success, otherwise false
 	"error": error		//error encountered, or undefined
 }
 
+//remove an article from the news feed
+DELETE /news/:id
+
+//arguments:
+{
+	"key": key			//the whitelist key, allows access to the DELETE routes
+}
+
+//result:
+{
+	"ok": ok			//true on success, otherwise false
+	"error": error		//error encountered, or undefined
+}
 ```
