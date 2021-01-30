@@ -4,7 +4,7 @@
   "description": "An API centric news server. Uses Sequelize and mariaDB by default.",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "pm2 start server/server.js --watch",
     "dev": "npm run watch:server",
     "watch:server": "nodemon . --ext js,jsx,json --ignore 'node_modules/*'"
   },
