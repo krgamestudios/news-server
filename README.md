@@ -9,6 +9,7 @@ Run the SQL script `sql/create_database.sql`. This will set up an empty database
 # API
 
 ```
+//NOTE: GET will return null if a specific article can't be found
 //NOTE: you can add a "limit" query parameter to change the default limit
 GET /news?limit=10
 

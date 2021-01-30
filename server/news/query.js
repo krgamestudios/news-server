@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { articles } = require('../database/models');
 
 //the query function that can be reused
@@ -8,13 +9,14 @@ const query = (ascending, titlesOnly) => async (req, res) => {
 			attributes: [
 				'index', 'title', 'author', ...(!titlesOnly ? ['body', 'edits'] : [])
 			],
-			order: [
-				['index', ascending ? 'ASC' : 'DESC']
-			],
-			offset: parseInt(req.query.id) || 0,
-			limit: 1
+			where: {
+				index: {
+					[Op.eq]: ascending ? parseInt(req.params.id) : (await articles.max('index')) - parseInt(req.params.id) + 1
+				}
+			}
 		});
 
+		//returns null if failed to find
 		return res.status(200).json(result);
 	}
 
