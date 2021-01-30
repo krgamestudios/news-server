@@ -2,19 +2,23 @@
 
 An API centric news server. Uses Sequelize and mariaDB by default.
 
+# Setup
+
+Run the SQL script `sql/create_database.sql`. This will set up an empty database called `news`, and a new user called `news`.
+
 # API
 
 ```
 //NOTE: you can add a "limit" query parameter to change the default limit
-/news?limit=10
+GET /news?limit=10
 
-//GET get latest news, up to a default limit, or specify the index "id"
-/news/:id
+//get latest news, up to a default limit, or specify the index "id"
+GET /news/:id
 
-//GET get the news starting from the beginning, up to a default limit, or specify the index "id"
-/news/archive/:id
+//get the news starting from the beginning, up to a default limit, or specify the index "id"
+GET /news/archive/:id
 
-//result:
+//result (if only a single article is specified, returns just that article rather than an array):
 [
 	{
 		"index": index,		//absolute index of the result
@@ -26,13 +30,13 @@ An API centric news server. Uses Sequelize and mariaDB by default.
 	...
 ]
 
-//GET get the latest titles, up to a default limit, or specify the index "id"
-/news/titles/:id
+//get the latest titles, up to a default limit, or specify the index "id"
+GET /news/titles/:id
 
-//GET get the titles starting from the beginning, up to a default limit, or specify the index "id"
-/news/archive/titles/:id
+//get the titles starting from the beginning, up to a default limit, or specify the index "id"
+GET /news/archive/titles/:id
 
-//result:
+//result (if only a single article is specified, returns just that article rather than an array):
 [
 	{
 		"index": index,		//absolute index of the result
@@ -42,8 +46,8 @@ An API centric news server. Uses Sequelize and mariaDB by default.
 	...
 ]
 
-//POST send a formatted JSON object, returns new index on success, or error on failure
-/news/publish
+//send a formatted JSON object, returns new index on success, or error on failure
+POST /news
 
 //arguments:
 {
@@ -60,8 +64,8 @@ An API centric news server. Uses Sequelize and mariaDB by default.
 	"error": error		//error encountered, or undefined
 }
 
-//PATCH similar to `/news/publish`, but allows overwriting an existing post
-/news/edit/:id
+//similar to `/news/publish`, but allows overwriting an existing post
+PATCH /news/:id
 
 //arguments:
 {
