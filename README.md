@@ -66,7 +66,7 @@ POST /news
 	"error": error		//error encountered, or undefined
 }
 
-//similar to `/news/publish`, but allows overwriting an existing article
+//similar to `POST /news`, but allows overwriting an existing article
 PATCH /news/:id
 
 //arguments:
