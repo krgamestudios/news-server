@@ -23,11 +23,13 @@ GET /news/archive/:id
 //result (if only a single article is specified, returns just that article rather than an array):
 [
 	{
-		"index": index,		//absolute index of the result
-		"title": title,		//title of the article
-		"author": author,	//author of the aricle
-		"body": body,		//body of the article
-		"edits": edits		//number of times this article has been edited
+		"index": index,			//absolute index of the result
+		"title": title,			//title of the article
+		"author": author,		//author of the aricle
+		"body": body,			//body of the article
+		"edits": edits			//number of times this article has been edited
+		"createdAt": createdAt	//time created
+		"updatedAt": updatedAt	//time updated
 	},
 	...
 ]
@@ -41,9 +43,12 @@ GET /news/archive/titles/:id
 //result (if only a single article is specified, returns just that article rather than an array):
 [
 	{
-		"index": index,		//absolute index of the result
-		"title": title,		//title of the article
-		"author": author	//author of the article
+		"index": index,			//absolute index of the result
+		"title": title,			//title of the article
+		"author": author		//author of the article
+		"edits": edits			//number of times this article has been edited
+		"createdAt": createdAt	//time created
+		"updatedAt": updatedAt	//time updated
 	},
 	...
 ]

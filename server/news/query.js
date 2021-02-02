@@ -7,7 +7,7 @@ const query = (ascending, titlesOnly) => async (req, res) => {
 	if (req.params.id && typeof(parseInt(req.params.id)) === 'number') {
 		const result = await articles.findOne({
 			attributes: [
-				'index', 'title', 'author', ...(!titlesOnly ? ['body', 'edits'] : [])
+				'index', 'title', 'author', 'edits', 'createdAt', 'updatedAt', ...(!titlesOnly ? ['body'] : [])
 			],
 			where: {
 				index: {
@@ -24,7 +24,7 @@ const query = (ascending, titlesOnly) => async (req, res) => {
 	else {
 		const result = await articles.findAndCountAll({
 			attributes: [
-				'index', 'title', 'author', ...(!titlesOnly ? ['body', 'edits'] : [])
+				'index', 'title', 'author', 'edits', 'createdAt', 'updatedAt', ...(!titlesOnly ? ['body'] : [])
 			],
 			order: [
 				['index', ascending ? 'ASC' : 'DESC']
