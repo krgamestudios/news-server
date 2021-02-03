@@ -26,12 +26,8 @@ services:
     networks: 
       - app-network
     volumes:
-      - db-data:/var/lib/mysql
+      - ./data:/var/lib/mysql
 
 networks:
   app-network:
     driver: bridge
-
-volumes:
-  db-data:
-    driver: local
