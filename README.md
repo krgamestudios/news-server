@@ -4,8 +4,7 @@ An API centric news server. Uses Sequelize and mariaDB by default.
 
 # Setup
 
-1. Run `cp .envdev .env`, then enter the correct information into the new file.
-2. Run the SQL script `sql/create_database.sql`. This will set up an empty database called `news`, and a new user called `news`.
+This currently runs in docker. It might need to run twice the first time.
 
 # API
 
