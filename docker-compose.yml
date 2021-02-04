@@ -6,11 +6,14 @@ services:
     build:
       context: .
     environment:
+      WEB_PORT: 3100
       DB_HOSTNAME: database
       DB_DATABASE: news
       DB_USERNAME: news
       DB_PASSWORD: charizard
       DB_TIMEZONE: Australia/Sydney
+      QUERY_LIMIT: 10
+      QUERY_KEY: key
     networks: 
       - app-network
     ports:
