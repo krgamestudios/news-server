@@ -15,4 +15,5 @@ EXPOSE 3100
 
 USER node
 
-ENTRYPOINT ["npm", "start"]
+ENTRYPOINT ["bash", "-c"]
+CMD ["sleep 10 && npm start"]
