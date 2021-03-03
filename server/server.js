@@ -24,6 +24,7 @@ app.get('*', (req, res) => {
 });
 
 //startup
-server.listen(process.env.WEB_PORT || 3100, (err) => {
+server.listen(process.env.WEB_PORT || 3100, async (err) => {
+	await database.sync();
 	console.log(`listening to localhost:${process.env.WEB_PORT || 3100}`);
 });

@@ -3,6 +3,8 @@ const sequelize = require('..');
 
 const articles = require('./articles');
 
+sequelize.sync();
+
 const revisions = sequelize.define('revisions', {
 	title: {
 		type: Sequelize.TEXT,
