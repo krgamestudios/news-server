@@ -2,11 +2,6 @@ const { Op } = require('sequelize');
 const { articles, revisions } = require('../database/models');
 
 const route = async (req, res) => {
-	//check the key
-	if (req.body.key != process.env.QUERY_KEY) {
-		return res.status(401).json({ ok: false, error: 'invalid key' });
-	}
-
 	//get the existing record
 	const record = await articles.findOne({
 		where: {
@@ -17,7 +12,7 @@ const route = async (req, res) => {
 	});
 
 	if (!record) {
-		return res.status(500).json({ ok: false, error: 'failed to remove non-existing record' });
+		return res.status(500).json('Failed to remove non-existing record');
 	}
 
 	//store the revision
@@ -35,9 +30,7 @@ const route = async (req, res) => {
 		}
 	});
 
-	return res.status(200).json({
-		ok: true
-	});
+	return res.status(200).end();
 };
 
 module.exports = route;

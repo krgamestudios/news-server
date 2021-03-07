@@ -1,11 +1,6 @@
 const { articles } = require('../database/models');
 
 const route = async (req, res) => {
-	//check the key
-	if (req.body.key != process.env.QUERY_KEY) {
-		return res.status(401).json({ ok: false, error: 'invalid key' });
-	}
-
 	//upsert the data
 	const [instance, created] = await articles.upsert({
 		title: req.body.title,
@@ -14,10 +9,10 @@ const route = async (req, res) => {
 	});
 
 	if (!created) {
-		return res.status(500).json({ ok: false, error: 'failed to create record' });
+		return res.status(500).send('Failed to create record');
 	}
 
-	//BUGFIX
+	//BUGFIX: instance doesn't have the index for some reason
 	const result = await articles.findOne({
 		order: [
 			['index', 'DESC']
@@ -25,7 +20,6 @@ const route = async (req, res) => {
 	});
 
 	return res.status(200).json({
-		ok: true,
 //		index: instance.get('index')
 		index: result.index
 	});

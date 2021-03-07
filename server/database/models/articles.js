@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('..');
 
-module.exports = sequelize.define('articles', {
+const articles = sequelize.define('articles', {
 	index: {
 		type: Sequelize.INTEGER(11),
 		allowNull: false,
@@ -30,3 +30,7 @@ module.exports = sequelize.define('articles', {
 		defaultValue: 0
 	}
 });
+
+sequelize.sync();
+
+module.exports = articles;

@@ -7,4 +7,5 @@ DB_PASSWORD=charizard
 DB_TIMEZONE=Australia/Sydney
 
 QUERY_LIMIT=10
-QUERY_KEY=key
+
+SECRET_ACCESS=access
