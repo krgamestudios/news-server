@@ -116,7 +116,7 @@ COPY . /app
 EXPOSE ${appPort}
 USER node
 ENTRYPOINT ["bash", "-c"]
-CMD ["sleep 10 && npm start"]	
+CMD ["sleep 10 && npm start"]
 `;
 
 	const sqlfile = `
