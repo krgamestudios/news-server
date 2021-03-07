@@ -1,0 +1,33 @@
+#Query
+GET https://dev-news.eggtrainer.com/news HTTP/1.1
+
+###
+
+#Publish
+POST https://dev-news.eggtrainer.com/news HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer
+
+{
+	"title": "Hello World",
+	"author": "Kayne Ruse",
+	"body": "Lorem ipsum."
+}
+
+###
+
+#Edit
+PATCH https://dev-news.eggtrainer.com/news/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer
+
+{
+	"title": "Goodnight World"
+}
+
+###
+
+#Delete
+DELETE https://dev-news.eggtrainer.com/news/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer
