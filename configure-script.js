@@ -66,17 +66,17 @@ services:
       - DB_TIMEZONE=Australia/Sydney
       - QUERY_LIMIT=10
       - SECRET_ACCESS=${appSecretAccess}
-    networks: 
+    networks:
       - app-network
     depends_on:
       - database
   database:
     image: mariadb:latest
     environment:
-      - MYSQL_DATABASE: ${appName}
-      - MYSQL_USER: ${appDBUser}
-      - MYSQL_PASSWORD: ${appDBPass}
-      - MYSQL_ROOT_PASSWORD: ${dbRootPass}
+      MYSQL_DATABASE: ${appName}
+      MYSQL_USER: ${appDBUser}
+      MYSQL_PASSWORD: ${appDBPass}
+      MYSQL_ROOT_PASSWORD: ${dbRootPass}
     networks: 
       - app-network
     volumes:
