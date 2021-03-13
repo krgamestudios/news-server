@@ -91,11 +91,11 @@ Authorization: Bearer XXX
 	"body": body		//body of the article, optional
 }
 
-status 200 on success, otherwise an error status
+result: status 200 on success, otherwise an error status
 
 //remove an article from the news feed
 DELETE /news/:id
 Authorization: Bearer XXX
 
-status 200 on success, otherwise an error status
+//result: status 200 on success, otherwise an error status
 ```
