@@ -1,7 +1,7 @@
 {
-  "name": "news-server",
+  "name": "01-news",
   "version": "1.0.0",
-  "description": "An API centric news server. Uses Sequelize and mariaDB by default.",
+  "description": "",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -13,14 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/krgamestudios/news-server.git"
+    "url": "https://gitea.krgamestudios.com/krgamestudios/01-news.git"
   },
   "author": "Kayne Ruse",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/krgamestudios/news-server/issues"
-  },
-  "homepage": "https://github.com/krgamestudios/news-server#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
