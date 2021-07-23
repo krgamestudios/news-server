@@ -3,7 +3,7 @@ WEB_PORT=3100
 DB_HOSTNAME=database
 DB_DATABASE=news
 DB_USERNAME=news
-DB_PASSWORD=charizard
+DB_PASSWORD=venusaur
 
 # Select a "TZ database name" that suits your needs: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 DB_TIMEZONE=Australia/Sydney
