@@ -25,9 +25,9 @@ const route = async (req, res) => {
 
 	//update the data
 	await articles.update({
-		title: req.body.title,
-		author: req.body.author,
-		body: req.body.body,
+		title: req.body.title || record.title,
+		author: req.body.author || record.author,
+		body: req.body.body || record.body,
 		edits: record.edits + 1
 	}, {
 		where: {

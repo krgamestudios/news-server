@@ -1,6 +1,19 @@
 const { articles } = require('../database/models');
 
 const route = async (req, res) => {
+	//check for missing data
+	if (!req.body.title) {
+		return res.status(401).end("Missing title");
+	}
+
+	if (!req.body.author) {
+		return res.status(401).end("Missing author");
+	}
+
+	if (!req.body.body) {
+		return res.status(401).end("Missing body");
+	}
+
 	//upsert the data
 	const [instance, created] = await articles.upsert({
 		title: req.body.title,
