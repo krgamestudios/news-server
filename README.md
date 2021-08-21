@@ -20,6 +20,36 @@ Content-Type: application/json
 
 # API
 
+## News listing
+
+Returns a number of news items, with the default limited configured in [somewhere].
+
+Accepted query parameters:
+
+- limit
+- filter
+
+```
+GET /news?limit=10
+```
+
+### Example
+
+```json
+{
+  "id": 5,
+  "title": "This is the title",
+  "excerpt": "Lorem ipsum do....",
+  "body": "Lorem ipsum dolor sit amet, etc",
+  "author": "Keanu Reeves"
+}
+```
+
+
+## Single news entry
+
+## Archived news entry listing
+
 ```
 //NOTE: GET will return an empty array if a specific article can't be found
 //NOTE: you can add a "limit" query parameter to change the default limit
