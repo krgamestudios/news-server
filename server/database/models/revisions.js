@@ -17,12 +17,15 @@ const revisions = sequelize.define('revisions', {
 	body: {
 		type: Sequelize.TEXT,
 		defaultValue: ''
+	},
+
+	originalIndex: {
+		type: Sequelize.INTEGER(11),
+		default: null
 	}
 });
 
 //relationships
-articles.hasOne(revisions, { as: 'original' });
-
 sequelize.sync();
 
 module.exports = revisions;
