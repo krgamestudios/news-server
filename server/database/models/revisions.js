@@ -1,8 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('..');
 
-const articles = require('./articles');
-
 const revisions = sequelize.define('revisions', {
 	title: {
 		type: Sequelize.TEXT,
