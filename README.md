@@ -48,6 +48,7 @@ GET /news/archive/:id
 		"title": title,			//title of the article
 		"author": author,		//author of the aricle
 		"body": body,			//body of the article
+		"rendered": rendered	//body rendered as HTML
 		"edits": edits			//number of times this article has been edited
 		"createdAt": createdAt	//time created
 		"updatedAt": updatedAt	//time updated
