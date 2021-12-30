@@ -25,6 +25,11 @@ const articles = sequelize.define('articles', {
 		defaultValue: ''
 	},
 
+	rendered: {
+		type: Sequelize.TEXT,
+		defaultValue: ''
+	},
+
 	edits: {
 		type: Sequelize.INTEGER(11),
 		defaultValue: 0

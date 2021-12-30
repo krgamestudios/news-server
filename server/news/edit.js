@@ -1,5 +1,6 @@
 const { Op } = require('sequelize');
 const { articles, revisions } = require('../database/models');
+const markdownIt = require('markdown-it')();
 
 const route = async (req, res) => {
 	//get the existing record
@@ -20,6 +21,7 @@ const route = async (req, res) => {
 		title: record.title,
 		author: record.author,
 		body: record.body,
+		rendered: record.rendered,
 		originalIndex: record.index
 	});
 
@@ -28,6 +30,7 @@ const route = async (req, res) => {
 		title: req.body.title || record.title,
 		author: req.body.author || record.author,
 		body: req.body.body || record.body,
+		rendered: markdownIt.render(req.body.body) || record.rendered,
 		edits: record.edits + 1
 	}, {
 		where: {

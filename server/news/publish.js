@@ -1,4 +1,5 @@
 const { articles } = require('../database/models');
+const markdownIt = require('markdown-it')();
 
 const route = async (req, res) => {
 	//check for missing data
@@ -18,7 +19,8 @@ const route = async (req, res) => {
 	const [instance, created] = await articles.upsert({
 		title: req.body.title,
 		author: req.body.author,
-		body: req.body.body
+		body: req.body.body,
+		rendered: markdownIt.render(req.body.body),
 	});
 
 	if (!created) {

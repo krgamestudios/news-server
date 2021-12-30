@@ -20,6 +20,7 @@ const route = async (req, res) => {
 		title: record.title,
 		author: record.author,
 		body: record.body,
+		rendered: record.rendered,
 		originalIndex: record.index
 	});
 

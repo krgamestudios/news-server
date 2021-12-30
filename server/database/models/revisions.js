@@ -2,6 +2,14 @@ const Sequelize = require('sequelize');
 const sequelize = require('..');
 
 const revisions = sequelize.define('revisions', {
+	index: {
+		type: Sequelize.INTEGER(11),
+		allowNull: false,
+		autoIncrement: true,
+		primaryKey: true,
+		unique: true
+	},
+
 	title: {
 		type: Sequelize.TEXT,
 		defaultValue: ''
@@ -13,6 +21,11 @@ const revisions = sequelize.define('revisions', {
 	},
 
 	body: {
+		type: Sequelize.TEXT,
+		defaultValue: ''
+	},
+
+	rendered: {
 		type: Sequelize.TEXT,
 		defaultValue: ''
 	},
