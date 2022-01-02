@@ -23,7 +23,7 @@ router.get('/archive/metadata/:id(\\d+)', query(true, true));
 //use middleware to authenticate the rest of the routes
 router.use(authToken);
 router.use((req, res, next) => {
-	if (req.user.admin) {
+	if (req.user.mod) {
 		next();
 	} else {
 		res.status(403).end();
