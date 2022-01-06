@@ -1,5 +1,5 @@
 const { articles } = require('../database/models');
-const markdownIt = require('markdown-it')();
+const markdownIt = require('markdown-it')({ html: true });
 
 const route = async (req, res) => {
 	//check for missing data

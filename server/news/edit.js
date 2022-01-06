@@ -1,6 +1,6 @@
 const { Op } = require('sequelize');
 const { articles, revisions } = require('../database/models');
-const markdownIt = require('markdown-it')();
+const markdownIt = require('markdown-it')({ html: true });
 
 const route = async (req, res) => {
 	//get the existing record
