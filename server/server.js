@@ -27,7 +27,7 @@ server.listen(process.env.WEB_PORT || 3100, async (err) => {
 	await database.sync();
 	console.log(`listening to localhost:${process.env.WEB_PORT || 3100}`);
 
-	//parse the unrendered data from the database
+	//COMPATABILITY: parse the unrendered data from the database
 	const markdownIt = require('markdown-it')();
 	const { articles, revisions } = require('./database/models');
 
