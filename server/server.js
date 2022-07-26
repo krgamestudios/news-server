@@ -5,11 +5,9 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-const cors = require('cors');
 
 //config
 app.use(express.json());
-app.use(cors());
 
 //database connection
 const database = require('./database');
