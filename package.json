@@ -1,6 +1,6 @@
 {
   "name": "news-server",
-  "version": "1.5.0",
+  "version": "1.5.2",
   "description": "An API centric news server. Uses Sequelize and mariaDB by default.",
   "main": "server/server.js",
   "scripts": {
