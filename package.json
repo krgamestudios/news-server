@@ -25,7 +25,7 @@
     "jsonwebtoken": "^9.0.0",
     "mariadb": "^3.0.2",
     "markdown-it": "^13.0.1",
-    "sequelize": "^6.25.8"
+    "sequelize": "^6.28.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
