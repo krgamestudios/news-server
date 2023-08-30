@@ -201,7 +201,7 @@ Get either an array of metadata (oldest first), or a specified article's metadat
 		The current page you want returning
 - `page_size`
 	- TYPE: `number`
-		The number of results to return. This superseeds the `PAGE_SIZE` environment variable for the query
+		The number of results to return. This supersedes the `PAGE_SIZE` environment variable for the query
 
 > **NOTE**
 > If a specific article is requested, then just that article is returned rather than an array
