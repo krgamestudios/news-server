@@ -22,112 +22,248 @@ Content-Type: application/json
 
 # API
 
+### `GET /news/:id?`
+
+Get either an array of articles (newest first), or a specified article if the optional "id" parameter is given.
+
+#### Response Body
+
+```jsonc
+[{
+	// [Number] index of the article
+	"index": index,
+
+	// [String] author of the article
+	"author": author,
+
+	// [String] raw body of the article
+	"body": body,
+
+	// [Number] number of times this article has been edited
+	"edits": edits,
+
+	// [String] body of the article rendered as HTML
+	"rendered": rendered,
+
+	// [String] title of the article
+	"title": title,
+
+	// [Date] time article was created
+	"createdAt": createdAt,
+
+	// [Date] time article was updated
+	"updatedAt": updatedAt,
+}]
 ```
-//NOTE: GET will return an empty array if a specific article can't be found
-//NOTE: you can add a "limit" query parameter to change the default limit
-GET /news?limit=10
 
+#### Available Query Parameters
 
-###
+- `fields`
+	- TYPE: `string`
+		A comma separated list of the field names you want returning, (index will always be returned)
+- `page`
+	- TYPE: `number`
+		The current page you want returning
+- `page_size`
+	- TYPE: `number`
+		The number of results to return. This superseeds the `PAGE_SIZE` environment variable for the query
 
+> **NOTE**
+> If a specific article is requested, then just that article is returned rather than an array
 
-//DOCS: get latest news, up to a default limit, or specify the index "id"
-GET /news/:id
+### `GET /news/archive/:id?`
 
+Get either an array of articles (oldest first), or a specified article if the optional "id" parameter is given.
 
-###
+#### Response Body
 
+```jsonc
+[{
+	// [Number] index of the article
+	"index": index,
 
-//DOCS: get the news starting from the beginning, up to a default limit, or specify the index "id"
-GET /news/archive/:id
+	// [String] author of the article
+	"author": author,
 
-//DOCS: result (if only a single article is specified, returns just that article rather than an array):
-[
-	{
-		"index": index,			//absolute index of the result
-		"title": title,			//title of the article
-		"author": author,		//author of the aricle
-		"body": body,			//body of the article
-		"rendered": rendered	//body rendered as HTML
-		"edits": edits			//number of times this article has been edited
-		"createdAt": createdAt	//time created
-		"updatedAt": updatedAt	//time updated
-	},
-	...
-]
+	// [String] raw body of the article
+	"body": body,
 
+	// [Number] number of times this article has been edited
+	"edits": edits,
 
-###
+	// [String] body of the article rendered as HTML
+	"rendered": rendered,
 
+	// [String] title of the article
+	"title": title,
 
-//DOCS: get the latest metadata, up to a default limit, or specify the index "id"
-GET /news/metadata/:id
+	// [Date] time article was created
+	"createdAt": createdAt,
 
-
-###
-
-
-//DOCS: get the metadata starting from the beginning, up to a default limit, or specify the index "id"
-GET /news/archive/metadata/:id
-
-//DOCS: result (if only a single article is specified, returns just that article rather than an array):
-[
-	{
-		"index": index,			//absolute index of the result
-		"title": title,			//title of the article
-		"author": author		//author of the article
-		"edits": edits			//number of times this article has been edited
-		"createdAt": createdAt	//time created
-		"updatedAt": updatedAt	//time updated
-	},
-	...
-]
-
-
-###
-
-
-//DOCS: send a formatted JSON object, returns new index on success, or error on failure
-POST /news
-Authorization: Bearer XXX
-
-{
-	"title": title		//title of the article
-	"author": author	//author of the article
-	"body": body		//body of the article
-}
-
-//DOCS: result (status 200 on success, otherwise an error status):
-{
-	"index": index		//new index of the article
-}
-
-
-###
-
-
-//DOCS: similar to `POST /news`, but allows overwriting an existing article
-PATCH /news/:id
-Authorization: Bearer XXX
-
-{
-	"title": title		//title of the article, optional
-	"author": author	//author of the article, optional
-	"body": body		//body of the article, optional
-}
-
-//DOCS: result: status 200 on success, otherwise an error status
-
-
-###
-
-
-//DOCS: remove an article from the news feed
-DELETE /news/:id
-Authorization: Bearer XXX
-
-//DOCS: result: status 200 on success, otherwise an error status
-
-
-###
+	// [Date] time article was updated
+	"updatedAt": updatedAt,
+}]
 ```
+
+#### Available Query Parameters
+
+- `fields`
+	- TYPE: `string`
+		A comma separated list of the field names you want returning, (index will always be returned)
+- `page`
+	- TYPE: `number`
+		The current page you want returning
+- `page_size`
+	- TYPE: `number`
+		The number of results to return. This superseeds the `PAGE_SIZE` environment variable for the query
+
+> **NOTE**
+> If a specific article is requested, then just that article is returned rather than an array
+
+### `GET /news/metadata/:id?`
+
+Get either an array of metadata (newest first), or a specified article's metadata if the optional "id" parameter is given.
+
+#### Response Body
+
+```jsonc
+[{
+	// [Number] index of the article
+	"index": index,
+
+	// [String] author of the article
+	"author": author,
+
+	// [Number] number of times this article has been edited
+	"edits": edits,
+
+	// [String] title of the article
+	"title": title,
+
+	// [Date] time article was created
+	"createdAt": createdAt,
+
+	// [Date] time article was updated
+	"updatedAt": updatedAt,
+}]
+```
+
+#### Available Query Parameters
+
+- `fields`
+	- TYPE: `string`
+		A comma separated list of the field names you want returning, (index will always be returned)
+- `page`
+	- TYPE: `number`
+		The current page you want returning
+- `page_size`
+	- TYPE: `number`
+		The number of results to return. This superseeds the `PAGE_SIZE` environment variable for the query
+
+> **NOTE**
+> If a specific article is requested, then just that article is returned rather than an array
+
+### `GET /news/archive/metadata/:id?`
+
+Get either an array of metadata (oldest first), or a specified article's metadata if the optional "id" parameter is given.
+
+#### Response Body
+
+```jsonc
+[{
+	// [Number] index of the article
+	"index": index,
+
+	// [String] author of the article
+	"author": author,
+
+	// [Number] number of times this article has been edited
+	"edits": edits,
+
+	// [String] title of the article
+	"title": title,
+
+	// [Date] time article was created
+	"createdAt": createdAt,
+
+	// [Date] time article was updated
+	"updatedAt": updatedAt,
+}]
+```
+
+#### Available Query Parameters
+
+- `fields`
+	- TYPE: `string`
+		A comma separated list of the field names you want returning, (index will always be returned)
+- `page`
+	- TYPE: `number`
+		The current page you want returning
+- `page_size`
+	- TYPE: `number`
+		The number of results to return. This supersedes the `PAGE_SIZE` environment variable for the query
+
+> **NOTE**
+> If a specific article is requested, then just that article is returned rather than an array
+
+---
+
+### `POST /news`
+
+> **IMPORTANT**
+> Requires valid JWT Authorization header (Authorization: Bearer XXX)
+
+Create a new article resource, returns either the new article's index on success, or an error on failure.
+
+#### Request Body
+
+```jsonc
+{
+	// [String] OPTIONAL: title of the article
+	"title": title,
+
+	// [String] OPTIONAL: author of the article
+	"author": author,
+
+	// [String] OPTIONAL: body of the article
+	"body": body,
+}
+```
+
+#### Response Body
+
+```jsonc
+{
+	// [Number]: new index of the article
+	"index": index,
+}
+```
+
+### `PATCH /news/:id`
+
+> **IMPORTANT**
+> Requires valid JWT Authorization header (Authorization: Bearer XXX)
+
+Update an existing article resource, returns either status code 200 on success, or an error status on failure.
+
+#### Request Body
+
+```jsonc
+{
+	// [String] OPTIONAL: title of the article
+	"title": title,
+
+	// [String] OPTIONAL: author of the article
+	"author": author,
+
+	// [String] OPTIONAL: body of the article
+	"body": body,
+}
+```
+
+### `DELETE /news/:id`
+
+> **IMPORTANT**
+> Requires valid JWT Authorization header (Authorization: Bearer XXX)
+
+Remove an existing article resource from the news feed, returns either status code 200 on success, or an error status on failure.

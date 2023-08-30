@@ -66,7 +66,7 @@ services:
       - DB_USERNAME=${appDBUser}
       - DB_PASSWORD=${appDBPass}
       - DB_TIMEZONE=Australia/Sydney
-      - QUERY_LIMIT=10
+      - PAGE_SIZE=10
       - SECRET_ACCESS=${appSecretAccess}
     networks:
       - app-network
@@ -85,9 +85,7 @@ services:
       - ./mysql:/var/lib/mysql
       - ./startup.sql:/docker-entrypoint-initdb.d/startup.sql:ro
   traefik_${appName}:
-    container_name: ${appName}_traefik
     image: "traefik:v2.4"
-    container_name: "traefik"
     command:
       - "--log.level=ERROR"
       - "--api.insecure=false"
@@ -113,7 +111,7 @@ networks:
 	const dockerfile = `
 FROM node:18-bullseye-slim
 WORKDIR "/app"
-COPY package*.json ./
+COPY package*.json /app
 RUN npm install --production
 COPY . /app
 EXPOSE ${appPort}
