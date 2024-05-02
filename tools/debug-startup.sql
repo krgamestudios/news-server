@@ -1,4 +1,4 @@
 #use this while debugging
-CREATE DATABASE IF NOT EXISTS news;
-CREATE USER IF NOT EXISTS 'news'@'%' IDENTIFIED BY 'venusaur';
+CREATE DATABASE news;
+CREATE USER 'news'@'%' IDENTIFIED BY 'venusaur';
 GRANT ALL PRIVILEGES ON news.* TO 'news'@'%';
