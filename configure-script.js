@@ -62,20 +62,19 @@ const question = (prompt, def = null) => {
 
 	//generate the files
 	const ymlfile = `
-version: '3.8'
 services:
   ${appName}:
     build:
       context: .
     ports:
-      - "${appPort}"
+      - ${appPort}
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${appName}router.rule=Host(\`${appWebAddress}\`)"
-      - "traefik.http.routers.${appName}router.entrypoints=websecure"
-      - "traefik.http.routers.${appName}router.tls.certresolver=myresolver"
-      - "traefik.http.routers.${appName}router.service=${appName}service@docker"
-      - "traefik.http.services.${appName}service.loadbalancer.server.port=${appPort}"
+      - traefik.enable=true
+      - traefik.http.routers.${appName}router.rule=Host(\`${appWebAddress}\`)
+      - traefik.http.routers.${appName}router.entrypoints=websecure
+      - traefik.http.routers.${appName}router.tls.certresolver=myresolver
+      - traefik.http.routers.${appName}router.service=${appName}service@docker
+      - traefik.http.services.${appName}service.loadbalancer.server.port=${appPort}
     environment:
       - WEB_PORT=${appPort}
       - WEB_ORIGIN=${appWebOrigin}
@@ -87,10 +86,14 @@ services:
       - DB_TIMEZONE=Australia/Sydney
       - PAGE_SIZE=10
       - SECRET_ACCESS=${appSecretAccess}
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - app-network${ appDBHost != 'database' ? '' : `
     depends_on:
       - database
+
   database:
     image: mariadb:latest
     environment:
@@ -103,33 +106,37 @@ services:
       - app-network
     volumes:
       - ./mysql:/var/lib/mysql
-      - ./startup.sql:/docker-entrypoint-initdb.d/startup.sql:ro`}
+      - ./startup.sql:/docker-entrypoint-initdb.d/startup.sql:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro`}
+
   traefik_${appName}:
-    image: "traefik:v2.10"
+    image: traefik:latest
     command:
-      - "--log.level=ERROR"
-      - "--api.insecure=false"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.email=${supportEmail}"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - --log.level=ERROR
+      - --api.insecure=false
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.myresolver.acme.tlschallenge=true
+      - --certificatesresolvers.myresolver.acme.email=${supportEmail}
+      - --certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
     volumes:
-      - "./letsencrypt:/letsencrypt"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - ./letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - app-network
+
 networks:
   app-network:
     driver: bridge
 `;
 
 	const dockerfile = `
-FROM node:21-bookworm-slim
+FROM node:22-bookworm-slim
 WORKDIR "/app"
 COPY package*.json /app
 RUN npm install --production
