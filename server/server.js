@@ -16,7 +16,7 @@ const database = require('./database');
 app.use('/news', require('./news'));
 
 //error on access
-app.get('*', (req, res) => {
+app.get('/{*any}', (req, res) => {
 	res.redirect('https://github.com/krgamestudios/news-server');
 });
 

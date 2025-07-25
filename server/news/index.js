@@ -12,10 +12,10 @@ const edit = require('./edit');
 const remove = require('./remove');
 
 //basic route management (all query possibilities)
-router.get('/:id(\\d+)?', cors(), query(false, false));
-router.get('/archive/:id(\\d+)?', cors(), query(true, false));
-router.get('/metadata/:id(\\d+)?', cors(), query(false, true));
-router.get('/archive/metadata/:id(\\d+)?', cors(), query(true, true));
+router.get('/{:id}', cors(), query(false, false));
+router.get('/archive/{:id}', cors(), query(true, false));
+router.get('/metadata/{:id}', cors(), query(false, true));
+router.get('/archive/metadata/{:id}', cors(), query(true, true));
 
 //use middleware to authenticate the rest of the routes
 router.use(cors({
@@ -37,7 +37,7 @@ router.use((req, res, next) => {
 
 //authenticated routes
 router.post('/', publish);
-router.patch('/:id(\\d+)', edit);
-router.delete('/:id(\\d+)', remove);
+router.patch('/{:id}', edit);
+router.delete('/{:id}', remove);
 
 module.exports = router;
